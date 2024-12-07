@@ -1,0 +1,67 @@
+{
+    "name": "ledlr_S.jwpub", 
+    "hash": "a2ab5683b433d87208a4a8c861c2d609af5b82ef81369b1e68c72caf9ca0fd29", 
+    "timestamp": "2024-12-04T20:10:00Z", 
+    "version": 1, 
+    "expandedSize": 1364970, 
+    "contentFormat": "z-a", 
+    "htmlValidated": false, 
+    "mepsPlatformVersion": 2.100000, 
+    "mepsBuildNumber": 7098, 
+    "publication": {
+        "fileName": "ledlr_S.db", 
+        "type": 1, 
+        "title": "¿Por qué debe ser real para nosotros la esperanza de la resurrección?", 
+        "shortTitle": "La esperanza de la resurrección", 
+        "displayTitle": "La esperanza de la resurrección  (ledlr_S)", 
+        "referenceTitle": "La esperanza de la resurrección", 
+        "undatedReferenceTitle": "La esperanza de la resurrección", 
+        "titleRich": "ledlr_S", 
+        "displayTitleRich": "ledlr_S  (ledlr_S)", 
+        "referenceTitleRich": "ledlr_S", 
+        "undatedReferenceTitleRich": "ledlr_S", 
+        "symbol": "ledlr", 
+        "uniqueEnglishSymbol": "ledlr", 
+        "uniqueSymbol": "ledlr", 
+        "undatedSymbol": "ledlr", 
+        "englishSymbol": "ledlr", 
+        "language": 1, 
+        "hash": "7f958578403f173d209c1254371ff3ea59361629", 
+        "timestamp": "2024-12-04T20:10:00Z", 
+        "minPlatformVersion": 1, 
+        "schemaVersion": 8, 
+        "year": 2024, 
+        "issueId": 0, 
+        "issueNumber": 0, 
+        "variation": "", 
+        "publicationType": "FillerArticles", 
+        "rootSymbol": "ledlr", 
+        "rootYear": 2024, 
+        "rootLanguage": 1, 
+        "images": [
+            {
+                "signature": "7f958578403f173d209c1254371ff3ea59361629:600:600", 
+                "fileName": "familia-reunida.jpg", 
+                "type": "t", 
+                "attribute": "r", 
+                "width": 600, 
+                "height": 600
+            }
+        ], 
+        "categories": [
+            "FillerArticles"
+        ], 
+        "attributes": [], 
+        "issueAttributes": [], 
+        "issueProperties": {
+            "title": "", 
+            "undatedTitle": "", 
+            "coverTitle": "", 
+            "titleRich": "", 
+            "undatedTitleRich": "", 
+            "coverTitleRich": "", 
+            "symbol": "ledlr_S", 
+            "undatedSymbol": "ledlr_S"
+        }
+    }
+}

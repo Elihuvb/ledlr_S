@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/DV6000/Documents/Reviw Projects/ledlr_S/contents~/ledlr_S.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="6026"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainAsset"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS &quot;Publication&quot; (
+	&quot;PublicationId&quot;	INTEGER,
+	&quot;VersionNumber&quot;	INTEGER,
+	&quot;Type&quot;	INTEGER,
+	&quot;Title&quot;	TEXT,
+	&quot;TitleRich&quot;	TEXT,
+	&quot;RootSymbol&quot;	TEXT,
+	&quot;RootYear&quot;	INTEGER,
+	&quot;RootMepsLanguageIndex&quot;	INTEGER,
+	&quot;ShortTitle&quot;	TEXT,
+	&quot;ShortTitleRich&quot;	TEXT,
+	&quot;DisplayTitle&quot;	TEXT,
+	&quot;DisplayTitleRich&quot;	TEXT,
+	&quot;ReferenceTitle&quot;	TEXT,
+	&quot;ReferenceTitleRich&quot;	TEXT,
+	&quot;UndatedReferenceTitle&quot;	TEXT,
+	&quot;UndatedReferenceTitleRich&quot;	TEXT,
+	&quot;Symbol&quot;	TEXT NOT NULL,
+	&quot;UndatedSymbol&quot;	TEXT,
+	&quot;UniqueSymbol&quot;	TEXT,
+	&quot;EnglishSymbol&quot;	TEXT,
+	&quot;UniqueEnglishSymbol&quot;	TEXT NOT NULL,
+	&quot;IssueTagNumber&quot;	TEXT,
+	&quot;IssueNumber&quot;	INTEGER,
+	&quot;Variation&quot;	TEXT,
+	&quot;Year&quot;	INTEGER NOT NULL,
+	&quot;VolumeNumber&quot;	INTEGER,
+	&quot;MepsLanguageIndex&quot;	INTEGER NOT NULL,
+	&quot;PublicationType&quot;	TEXT,
+	&quot;PublicationCategorySymbol&quot;	TEXT,
+	&quot;BibleVersionForCitations&quot;	TEXT,
+	&quot;HasPublicationChapterNumbers&quot;	BOOLEAN,
+	&quot;HasPublicationSectionNumbers&quot;	BOOLEAN,
+	&quot;FirstDatedTextDateOffset&quot;	DATE,
+	&quot;LastDatedTextDateOffset&quot;	DATE,
+	&quot;MepsBuildNumber&quot;	INTEGER,
+	PRIMARY KEY(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationCategory&quot; (
+	&quot;PublicationCategoryId&quot;	INTEGER,
+	&quot;PublicationId&quot;	,
+	&quot;Category&quot;	TEXT,
+	PRIMARY KEY(&quot;PublicationCategoryId&quot;),
+	FOREIGN KEY(&quot;PublicationId&quot;) REFERENCES &quot;Publication&quot;(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationYear&quot; (
+	&quot;PublicationYearId&quot;	INTEGER,
+	&quot;PublicationId&quot;	,
+	&quot;Year&quot;	INTEGER,
+	PRIMARY KEY(&quot;PublicationYearId&quot;),
+	FOREIGN KEY(&quot;PublicationId&quot;) REFERENCES &quot;Publication&quot;(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationIssueProperty&quot; (
+	&quot;PublicationIssuePropertyId&quot;	INTEGER,
+	&quot;PublicationId&quot;	INTEGER,
+	&quot;Title&quot;	TEXT,
+	&quot;TitleRich&quot;	TEXT,
+	&quot;UndatedTitle&quot;	TEXT,
+	&quot;UndatedTitleRich&quot;	TEXT,
+	&quot;CoverTitle&quot;	TEXT,
+	&quot;CoverTitleRich&quot;	TEXT,
+	&quot;Symbol&quot;	TEXT,
+	&quot;UndatedSymbol&quot;	TEXT,
+	PRIMARY KEY(&quot;PublicationIssuePropertyId&quot;),
+	FOREIGN KEY(&quot;PublicationId&quot;) REFERENCES &quot;Publication&quot;(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationIssueAttribute&quot; (
+	&quot;PublicationIssueAttributeId&quot;	INTEGER,
+	&quot;PublicationId&quot;	INTEGER,
+	&quot;Attribute&quot;	TEXT,
+	PRIMARY KEY(&quot;PublicationIssueAttributeId&quot;),
+	FOREIGN KEY(&quot;PublicationId&quot;) REFERENCES &quot;Publication&quot;(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationAttribute&quot; (
+	&quot;PublicationAttributeId&quot;	INTEGER,
+	&quot;PublicationId&quot;	INTEGER,
+	&quot;Attribute&quot;	TEXT,
+	PRIMARY KEY(&quot;PublicationAttributeId&quot;),
+	FOREIGN KEY(&quot;PublicationId&quot;) REFERENCES &quot;Publication&quot;(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;RefPublication&quot; (
+	&quot;RefPublicationId&quot;	INTEGER,
+	&quot;VersionNumber&quot;	INTEGER,
+	&quot;Type&quot;	INTEGER,
+	&quot;Title&quot;	TEXT,
+	&quot;TitleRich&quot;	TEXT,
+	&quot;RootSymbol&quot;	TEXT,
+	&quot;RootYear&quot;	INTEGER,
+	&quot;RootMepsLanguageIndex&quot;	INTEGER,
+	&quot;ShortTitle&quot;	TEXT,
+	&quot;ShortTitleRich&quot;	TEXT,
+	&quot;DisplayTitle&quot;	TEXT,
+	&quot;DisplayTitleRich&quot;	TEXT,
+	&quot;ReferenceTitle&quot;	TEXT,
+	&quot;ReferenceTitleRich&quot;	TEXT,
+	&quot;UndatedReferenceTitle&quot;	TEXT,
+	&quot;UndatedReferenceTitleRich&quot;	TEXT,
+	&quot;Symbol&quot;	TEXT NOT NULL,
+	&quot;UndatedSymbol&quot;	TEXT,
+	&quot;UniqueSymbol&quot;	TEXT,
+	&quot;EnglishSymbol&quot;	TEXT,
+	&quot;UniqueEnglishSymbol&quot;	TEXT NOT NULL,
+	&quot;IssueTagNumber&quot;	TEXT,
+	&quot;IssueNumber&quot;	INTEGER,
+	&quot;Variation&quot;	TEXT,
+	&quot;Year&quot;	INTEGER NOT NULL,
+	&quot;VolumeNumber&quot;	INTEGER,
+	&quot;MepsLanguageIndex&quot;	INTEGER NOT NULL,
+	&quot;PublicationType&quot;	TEXT,
+	&quot;PublicationCategorySymbol&quot;	TEXT,
+	&quot;BibleVersionForCitations&quot;	TEXT,
+	&quot;HasPublicationChapterNumbers&quot;	BOOLEAN,
+	&quot;HasPublicationSectionNumbers&quot;	BOOLEAN,
+	&quot;FirstDatedTextDateOffset&quot;	DATE,
+	&quot;LastDatedTextDateOffset&quot;	DATE,
+	&quot;MepsBuildNumber&quot;	INTEGER,
+	PRIMARY KEY(&quot;RefPublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Document&quot; (
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;PublicationId&quot;	INTEGER,
+	&quot;MepsDocumentId&quot;	INTEGER,
+	&quot;MepsLanguageIndex&quot;	INTEGER,
+	&quot;Class&quot;	TEXT,
+	&quot;Type&quot;	INTEGER,
+	&quot;SectionNumber&quot;	INTEGER,
+	&quot;ChapterNumber&quot;	INTEGER,
+	&quot;Title&quot;	TEXT,
+	&quot;TitleRich&quot;	TEXT,
+	&quot;TocTitle&quot;	TEXT,
+	&quot;TocTitleRich&quot;	TEXT,
+	&quot;ContextTitle&quot;	TEXT,
+	&quot;ContextTitleRich&quot;	TEXT,
+	&quot;FeatureTitle&quot;	TEXT,
+	&quot;FeatureTitleRich&quot;	TEXT,
+	&quot;Subtitle&quot;	TEXT,
+	&quot;SubtitleRich&quot;	TEXT,
+	&quot;FeatureSubtitle&quot;	TEXT,
+	&quot;FeatureSubtitleRich&quot;	TEXT,
+	&quot;Content&quot;	BLOB,
+	&quot;FirstFootnoteId&quot;	INTEGER,
+	&quot;LastFootnoteId&quot;	INTEGER,
+	&quot;FirstBibleCitationId&quot;	INTEGER,
+	&quot;LastBibleCitationId&quot;	INTEGER,
+	&quot;ParagraphCount&quot;	INTEGER,
+	&quot;HasMediaLinks&quot;	BOOLEAN,
+	&quot;HasLinks&quot;	BOOLEAN,
+	&quot;FirstPageNumber&quot;	INTEGER,
+	&quot;LastPageNumber&quot;	INTEGER,
+	&quot;ContentLength&quot;	INTEGER,
+	&quot;PreferredPresentation&quot;	TEXT,
+	&quot;ContentReworkedDate&quot;	TEXT,
+	&quot;HasPronunciationGuide&quot;	BOOLEAN,
+	PRIMARY KEY(&quot;DocumentId&quot;),
+	FOREIGN KEY(&quot;PublicationId&quot;) REFERENCES &quot;Publication&quot;(&quot;PublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;RelatedDocument&quot; (
+	&quot;RelatedDocumentId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;MepsDocumentId&quot;	INTEGER,
+	&quot;RelationshipType&quot;	INTEGER,
+	PRIMARY KEY(&quot;RelatedDocumentId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Footnote&quot; (
+	&quot;FootnoteId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;FootnoteIndex&quot;	INTEGER,
+	&quot;Type&quot;	INTEGER,
+	&quot;Content&quot;	BLOB,
+	&quot;BibleVerseId&quot;	INTEGER,
+	&quot;ParagraphOrdinal&quot;	INTEGER,
+	PRIMARY KEY(&quot;FootnoteId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;),
+	FOREIGN KEY(&quot;BibleVerseId&quot;) REFERENCES &quot;BibleVerse&quot;(&quot;BibleVerseId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Endnote&quot; (
+	&quot;EndnoteId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;TextId&quot;	INTEGER,
+	&quot;Label&quot;	TEXT,
+	&quot;LabelRich&quot;	TEXT,
+	&quot;Content&quot;	BLOB,
+	PRIMARY KEY(&quot;EndnoteId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;DocumentEndnote&quot; (
+	&quot;DocumentEndnoteId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;EndnoteIndex&quot;	INTEGER,
+	&quot;ParagraphOrdinal&quot;	INTEGER,
+	&quot;EndnoteId&quot;	INTEGER,
+	PRIMARY KEY(&quot;DocumentEndnoteId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;),
+	FOREIGN KEY(&quot;EndnoteId&quot;) REFERENCES &quot;Endnote&quot;(&quot;EndnoteId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Question&quot; (
+	&quot;QuestionId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;QuestionIndex&quot;	INTEGER,
+	&quot;Content&quot;	BLOB,
+	&quot;ParagraphOrdinal&quot;	INTEGER,
+	&quot;TargetParagraphOrdinal&quot;	INTEGER,
+	&quot;TargetParagraphNumberLabel&quot;	INTEGER,
+	PRIMARY KEY(&quot;QuestionId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Extract&quot; (
+	&quot;ExtractId&quot;	INTEGER,
+	&quot;Link&quot;	TEXT,
+	&quot;Caption&quot;	TEXT,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;Content&quot;	BLOB,
+	&quot;RefPublicationId&quot;	INTEGER,
+	&quot;RefMepsDocumentId&quot;	INTEGER,
+	&quot;RefMepsDocumentClass&quot;	INTEGER,
+	&quot;RefBeginParagraphOrdinal&quot;	INTEGER,
+	&quot;RefEndParagraphOrdinal&quot;	INTEGER,
+	PRIMARY KEY(&quot;ExtractId&quot;),
+	FOREIGN KEY(&quot;RefPublicationId&quot;) REFERENCES &quot;RefPublication&quot;(&quot;RefPublicationId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;InternalLink&quot; (
+	&quot;InternalLinkId&quot;	INTEGER,
+	&quot;Link&quot;	TEXT,
+	&quot;Caption&quot;	TEXT,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;MepsDocumentId&quot;	INTEGER,
+	&quot;BeginParagraphOrdinal&quot;	INTEGER,
+	&quot;EndParagraphOrdinal&quot;	INTEGER,
+	PRIMARY KEY(&quot;InternalLinkId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;BibleCitation&quot; (
+	&quot;BibleCitationId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;BlockNumber&quot;	INTEGER,
+	&quot;ElementNumber&quot;	INTEGER,
+	&quot;FirstBibleVerseId&quot;	INTEGER,
+	&quot;LastBibleVerseId&quot;	INTEGER,
+	&quot;BibleVerseId&quot;	INTEGER,
+	&quot;ParagraphOrdinal&quot;	INTEGER,
+	&quot;MarginalClassification&quot;	INTEGER,
+	PRIMARY KEY(&quot;BibleCitationId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;),
+	FOREIGN KEY(&quot;FirstBibleVerseId&quot;) REFERENCES &quot;BibleVerse&quot;(&quot;BibleVerseId&quot;),
+	FOREIGN KEY(&quot;LastBibleVerseId&quot;) REFERENCES &quot;BibleVerse&quot;(&quot;BibleVerseId&quot;),
+	FOREIGN KEY(&quot;BibleVerseId&quot;) REFERENCES &quot;BibleVerse&quot;(&quot;BibleVerseId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;TextUnit&quot; (
+	&quot;TextUnitId&quot;	INTEGER,
+	&quot;Type&quot;	TEXT,
+	&quot;Id&quot;	INTEGER,
+	PRIMARY KEY(&quot;TextUnitId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;SearchIndexBibleVerse&quot; (
+	&quot;SearchIndexBibleVerseId&quot;	INTEGER,
+	&quot;WordId&quot;	INTEGER,
+	&quot;TextUnitCount&quot;	INTEGER,
+	&quot;WordOccurrenceCount&quot;	INTEGER,
+	&quot;TextUnitIndices&quot;	BLOB,
+	&quot;PositionalList&quot;	BLOB,
+	&quot;PositionalListIndex&quot;	BLOB,
+	PRIMARY KEY(&quot;SearchIndexBibleVerseId&quot;),
+	FOREIGN KEY(&quot;WordId&quot;) REFERENCES &quot;Word&quot;(&quot;WordId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;SearchIndexDocument&quot; (
+	&quot;SearchIndexDocumentId&quot;	INTEGER,
+	&quot;WordId&quot;	INTEGER,
+	&quot;TextUnitCount&quot;	INTEGER,
+	&quot;WordOccurrenceCount&quot;	INTEGER,
+	&quot;TextUnitIndices&quot;	BLOB,
+	&quot;PositionalList&quot;	BLOB,
+	&quot;PositionalListIndex&quot;	BLOB,
+	PRIMARY KEY(&quot;SearchIndexDocumentId&quot;),
+	FOREIGN KEY(&quot;WordId&quot;) REFERENCES &quot;word&quot;(&quot;WordId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;SearchTextRangeBibleVerse&quot; (
+	&quot;TextUnitId&quot;	INTEGER,
+	&quot;TextPositions&quot;	BLOB,
+	&quot;TextLengths&quot;	BLOB,
+	PRIMARY KEY(&quot;TextUnitId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;SearchTextRangeDocument&quot; (
+	&quot;TextUnitId&quot;	INTEGER,
+	&quot;TextPositions&quot;	BLOB,
+	&quot;TextLengths&quot;	BLOB,
+	&quot;ScopeParagraphData&quot;	BLOB,
+	PRIMARY KEY(&quot;TextUnitId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Asset&quot; (
+	&quot;AssetId&quot;	INTEGER,
+	&quot;FilePath&quot;	TEXT,
+	&quot;Type&quot;	TEXT,
+	&quot;VersionNumber&quot;	INTEGER,
+	PRIMARY KEY(&quot;AssetId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Multimedia&quot; (
+	&quot;MultimediaId&quot;	INTEGER,
+	&quot;LinkMultimediaId&quot;	INTEGER,
+	&quot;DataType&quot;	INTEGER,
+	&quot;MajorType&quot;	INTEGER,
+	&quot;MinorType&quot;	INTEGER,
+	&quot;Width&quot;	INTEGER,
+	&quot;Height&quot;	INTEGER,
+	&quot;MimeType&quot;	TEXT,
+	&quot;Label&quot;	TEXT,
+	&quot;LabelRich&quot;	TEXT,
+	&quot;Caption&quot;	TEXT,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;CaptionContent&quot;	BLOB,
+	&quot;CreditLine&quot;	TEXT,
+	&quot;CreditLineRich&quot;	TEXT,
+	&quot;CreditLineContent&quot;	BLOB,
+	&quot;CategoryType&quot;	INTEGER,
+	&quot;FilePath&quot;	TEXT,
+	&quot;KeySymbol&quot;	STRING,
+	&quot;Track&quot;	INTEGER,
+	&quot;MepsDocumentId&quot;	INTEGER,
+	&quot;MepsLanguageIndex&quot;	INTEGER,
+	&quot;IssueTagNumber&quot;	INTEGER,
+	&quot;SuppressZoom&quot;	BOOLEAN,
+	&quot;SizeConstraint&quot;	TEXT,
+	PRIMARY KEY(&quot;MultimediaId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;ExtractMultimedia&quot; (
+	&quot;ExtractMultimediaId&quot;	INTEGER,
+	&quot;RefMepsDocumentId&quot;	INTEGER NOT NULL,
+	&quot;RefMepsDocumentClass&quot;	INTEGER NOT NULL,
+	&quot;DataType&quot;	INTEGER,
+	&quot;MajorType&quot;	INTEGER,
+	&quot;MinorType&quot;	INTEGER,
+	&quot;Width&quot;	INTEGER,
+	&quot;Height&quot;	INTEGER,
+	&quot;MimeType&quot;	TEXT NOT NULL,
+	&quot;Label&quot;	TEXT NOT NULL,
+	&quot;LabelRich&quot;	TEXT,
+	&quot;Caption&quot;	TEXT NOT NULL,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;CaptionContent&quot;	BLOB,
+	&quot;CreditLine&quot;	TEXT,
+	&quot;CreditLineRich&quot;	TEXT,
+	&quot;CreditLineContent&quot;	BLOB,
+	&quot;CategoryType&quot;	INTEGER NOT NULL,
+	&quot;FilePath&quot;	TEXT NOT NULL,
+	&quot;KeySymbol&quot;	STRING,
+	&quot;Track&quot;	INTEGER,
+	&quot;MepsDocumentId&quot;	INTEGER,
+	&quot;MepsLanguageIndex&quot;	INTEGER,
+	&quot;IssueTagNumber&quot;	INTEGER,
+	&quot;SuppressZoom&quot;	BOOLEAN,
+	&quot;SizeConstraint&quot;	TEXT,
+	PRIMARY KEY(&quot;ExtractMultimediaId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationView&quot; (
+	&quot;PublicationViewId&quot;	INTEGER,
+	&quot;Name&quot;	TEXT,
+	&quot;Symbol&quot;	TEXT NOT NULL UNIQUE,
+	PRIMARY KEY(&quot;PublicationViewId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationViewItemDocument&quot; (
+	&quot;PublicationViewItemDocumentId&quot;	INTEGER,
+	&quot;PublicationViewItemId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	PRIMARY KEY(&quot;PublicationViewItemDocumentId&quot;),
+	FOREIGN KEY(&quot;PublicationViewItemId&quot;) REFERENCES &quot;PublicationViewItem&quot;(&quot;PublicationViewItemId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationViewItem&quot; (
+	&quot;PublicationViewItemId&quot;	INTEGER,
+	&quot;PublicationViewId&quot;	INTEGER,
+	&quot;ParentPublicationViewItemId&quot;	INTEGER,
+	&quot;Title&quot;	TEXT,
+	&quot;TitleRich&quot;	TEXT,
+	&quot;SchemaType&quot;	INTEGER,
+	&quot;ChildTemplateSchemaType&quot;	INTEGER,
+	&quot;DefaultDocumentId&quot;	INTEGER,
+	PRIMARY KEY(&quot;PublicationViewItemId&quot;),
+	FOREIGN KEY(&quot;PublicationViewId&quot;) REFERENCES &quot;PublicationView&quot;(&quot;PublicationViewId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationViewItemField&quot; (
+	&quot;PublicationViewItemFieldId&quot;	INTEGER,
+	&quot;PublicationViewItemId&quot;	INTEGER,
+	&quot;Value&quot;	TEXT,
+	&quot;ValueRich&quot;	TEXT,
+	&quot;Type&quot;	TEXT,
+	PRIMARY KEY(&quot;PublicationViewItemFieldId&quot;),
+	FOREIGN KEY(&quot;PublicationViewItemId&quot;) REFERENCES &quot;PublicationViewItem&quot;(&quot;PublicationViewItemId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;PublicationViewSchema&quot; (
+	&quot;PublicationViewSchemaId&quot;	INTEGER,
+	&quot;SchemaType&quot;	INTEGER,
+	&quot;DataType&quot;	TEXT,
+	PRIMARY KEY(&quot;PublicationViewSchemaId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Word&quot; (
+	&quot;WordId&quot;	INTEGER,
+	&quot;Word&quot;	TEXT,
+	&quot;Reading&quot;	TEXT,
+	PRIMARY KEY(&quot;WordId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;Topic&quot; (
+	&quot;TopicId&quot;	INTEGER,
+	&quot;Topic&quot;	TEXT,
+	&quot;DisplayTopic&quot;	TEXT,
+	&quot;DisplayTopicRich&quot;	TEXT,
+	PRIMARY KEY(&quot;TopicId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;TopicDocument&quot; (
+	&quot;TopicDocumentId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;TopicId&quot;	INTEGER,
+	PRIMARY KEY(&quot;TopicDocumentId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;),
+	FOREIGN KEY(&quot;TopicId&quot;) REFERENCES &quot;Topic&quot;(&quot;TopicId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;DatedText&quot; (
+	&quot;DatedTextId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;Link&quot;	TEXT,
+	&quot;FirstDateOffset&quot;	DATE,
+	&quot;LastDateOffset&quot;	DATE,
+	&quot;FirstFootnoteId&quot;	INTEGER,
+	&quot;LastFootnoteId&quot;	INTEGER,
+	&quot;FirstBibleCitationId&quot;	INTEGER,
+	&quot;LastBibleCitationId&quot;	INTEGER,
+	&quot;BeginParagraphOrdinal&quot;	INTEGER,
+	&quot;EndParagraphOrdinal&quot;	INTEGER,
+	&quot;Caption&quot;	TEXT,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;Content&quot;	BLOB,
+	PRIMARY KEY(&quot;DatedTextId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;DocumentParagraph&quot; (
+	&quot;DocumentParagraphId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;ParagraphIndex&quot;	INTEGER,
+	&quot;ParagraphNumberLabel&quot;	INTEGER,
+	&quot;BeginPosition&quot;	INTEGER,
+	&quot;EndPosition&quot;	INTEGER,
+	PRIMARY KEY(&quot;DocumentParagraphId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;DocumentInternalLink&quot; (
+	&quot;DocumentInternalLinkId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;InternalLinkId&quot;	INTEGER,
+	&quot;BeginParagraphOrdinal&quot;	INTEGER,
+	&quot;EndParagraphOrdinal&quot;	INTEGER,
+	PRIMARY KEY(&quot;DocumentInternalLinkId&quot;),
+	FOREIGN KEY(&quot;InternalLinkId&quot;) REFERENCES &quot;InternalLink&quot;(&quot;InternalLinkId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;DocumentExtract&quot; (
+	&quot;DocumentExtractId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;ExtractId&quot;	INTEGER,
+	&quot;BeginParagraphOrdinal&quot;	INTEGER,
+	&quot;EndParagraphOrdinal&quot;	INTEGER,
+	PRIMARY KEY(&quot;DocumentExtractId&quot;),
+	FOREIGN KEY(&quot;ExtractId&quot;) REFERENCES &quot;Extract&quot;(&quot;ExtractId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;DocumentMultimedia&quot; (
+	&quot;DocumentMultimediaId&quot;	INTEGER,
+	&quot;DocumentId&quot;	INTEGER,
+	&quot;MultimediaId&quot;	INTEGER,
+	&quot;BeginParagraphOrdinal&quot;	INTEGER,
+	&quot;EndParagraphOrdinal&quot;	INTEGER,
+	PRIMARY KEY(&quot;DocumentMultimediaId&quot;),
+	FOREIGN KEY(&quot;MultimediaId&quot;) REFERENCES &quot;Multimedia&quot;(&quot;MultimediaId&quot;),
+	FOREIGN KEY(&quot;DocumentId&quot;) REFERENCES &quot;Document&quot;(&quot;DocumentId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;ParagraphCommentary&quot; (
+	&quot;ParagraphCommentaryId&quot;	INTEGER,
+	&quot;CommentaryType&quot;	INTEGER,
+	&quot;Label&quot;	TEXT,
+	&quot;Content&quot;	BLOB,
+	PRIMARY KEY(&quot;ParagraphCommentaryId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;ParagraphCommentaryMap&quot; (
+	&quot;ParagraphCommentaryMapId&quot;	INTEGER,
+	&quot;MepsDocumentId&quot;	INTEGER,
+	&quot;BeginParagraphOrdinal&quot;	INTEGER,
+	&quot;EndParagraphOrdinal&quot;	INTEGER,
+	&quot;ParagraphCommentaryId&quot;	INTEGER,
+	PRIMARY KEY(&quot;ParagraphCommentaryMapId&quot;),
+	FOREIGN KEY(&quot;ParagraphCommentaryId&quot;) REFERENCES &quot;ParagraphCommentary&quot;(&quot;ParagraphCommentaryId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;VideoMarker&quot; (
+	&quot;VideoMarkerId&quot;	INTEGER,
+	&quot;MultimediaId&quot;	INTEGER,
+	&quot;Label&quot;	TEXT,
+	&quot;LabelRich&quot;	TEXT,
+	&quot;Caption&quot;	TEXT,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;Style&quot;	TEXT,
+	&quot;SegmentFormat&quot;	INTEGER,
+	&quot;StartTimeTicks&quot;	INTEGER,
+	&quot;DurationTicks&quot;	INTEGER,
+	&quot;StartFrame&quot;	INTEGER,
+	&quot;FrameCount&quot;	INTEGER,
+	&quot;BeginTransitionDurationTicks&quot;	INTEGER,
+	&quot;EndTransitionDurationTicks&quot;	INTEGER,
+	&quot;BeginTransitionFrameCount&quot;	INTEGER,
+	&quot;EndTransitionFrameCount&quot;	INTEGER,
+	PRIMARY KEY(&quot;VideoMarkerId&quot;),
+	FOREIGN KEY(&quot;MultimediaId&quot;) REFERENCES &quot;Multimedia&quot;(&quot;MultimediaId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;ExtractVideoMarker&quot; (
+	&quot;ExtractVideoMarkerId&quot;	INTEGER,
+	&quot;ExtractMultimediaId&quot;	INTEGER,
+	&quot;Label&quot;	TEXT NOT NULL,
+	&quot;LabelRich&quot;	TEXT,
+	&quot;Caption&quot;	TEXT,
+	&quot;CaptionRich&quot;	TEXT,
+	&quot;Style&quot;	TEXT,
+	&quot;SegmentFormat&quot;	INTEGER,
+	&quot;StartTimeTicks&quot;	INTEGER NOT NULL,
+	&quot;DurationTicks&quot;	INTEGER NOT NULL,
+	&quot;StartFrame&quot;	INTEGER,
+	&quot;FrameCount&quot;	INTEGER,
+	&quot;BeginTransitionDurationTicks&quot;	INTEGER,
+	&quot;EndTransitionDurationTicks&quot;	INTEGER NOT NULL,
+	&quot;BeginTransitionFrameCount&quot;	INTEGER,
+	&quot;EndTransitionFrameCount&quot;	INTEGER,
+	PRIMARY KEY(&quot;ExtractVideoMarkerId&quot;),
+	FOREIGN KEY(&quot;ExtractMultimediaId&quot;) REFERENCES &quot;ExtractMultimedia&quot;(&quot;ExtractMultimediaId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;ExtractVideoMarkerRange&quot; (
+	&quot;ExtractVideoMarkerRangeId&quot;	INTEGER,
+	&quot;ExtractId&quot;	INTEGER,
+	&quot;FirstExtractVideoMarkerId&quot;	INTEGER,
+	&quot;LastExtractVideoMarkerId&quot;	INTEGER,
+	PRIMARY KEY(&quot;ExtractVideoMarkerRangeId&quot;),
+	FOREIGN KEY(&quot;FirstExtractVideoMarkerId&quot;) REFERENCES &quot;ExtractVideoMarker&quot;(&quot;ExtractVideoMarkerId&quot;),
+	FOREIGN KEY(&quot;LastExtractVideoMarkerId&quot;) REFERENCES &quot;ExtractVideoMarker&quot;(&quot;ExtractVideoMarkerId&quot;),
+	FOREIGN KEY(&quot;ExtractId&quot;) REFERENCES &quot;Extract&quot;(&quot;ExtractId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;VideoMarkerParagraphLocation&quot; (
+	&quot;VideoMarkerParagraphLocationId&quot;	INTEGER,
+	&quot;DocumentParagraphId&quot;	INTEGER,
+	&quot;VideoMarkerId&quot;	INTEGER,
+	PRIMARY KEY(&quot;VideoMarkerParagraphLocationId&quot;),
+	FOREIGN KEY(&quot;DocumentParagraphId&quot;) REFERENCES &quot;DocumentParagraph&quot;(&quot;DocumentParagraphId&quot;),
+	FOREIGN KEY(&quot;VideoMarkerId&quot;) REFERENCES &quot;VideoMarker&quot;(&quot;VideoMarkerId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;VerseCommentary&quot; (
+	&quot;VerseCommentaryId&quot;	INTEGER,
+	&quot;CommentaryType&quot;	INTEGER,
+	&quot;Label&quot;	TEXT,
+	&quot;Content&quot;	BLOB,
+	PRIMARY KEY(&quot;VerseCommentaryId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;VerseCommentaryMap&quot; (
+	&quot;VerseCommentaryMapId&quot;	INTEGER,
+	&quot;BibleVerseId&quot;	INTEGER,
+	&quot;VerseCommentaryId&quot;	INTEGER,
+	PRIMARY KEY(&quot;VerseCommentaryMapId&quot;),
+	FOREIGN KEY(&quot;BibleVerseId&quot;) REFERENCES &quot;BibleVerse&quot;(&quot;BibleVerseId&quot;),
+	FOREIGN KEY(&quot;VerseCommentaryId&quot;) REFERENCES &quot;VerseCommentary&quot;(&quot;VerseCommentaryId&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;android_metadata&quot; (
+	&quot;locale&quot;	TEXT DEFAULT 'en_US'
+);
+INSERT INTO &quot;PublicationYear&quot; VALUES (NULL, NULL, strftime('%Y', 'now'));
+INSERT INTO &quot;PublicationView&quot; VALUES (1,'Publication Documents','jwpub');
+INSERT INTO &quot;PublicationViewSchema&quot; VALUES (1,0,'name');
+INSERT INTO &quot;android_metadata&quot; VALUES ('en_US');
+CREATE INDEX IF NOT EXISTS &quot;idx_SearchIndexBibleVerse&quot; ON &quot;SearchIndexBibleVerse&quot; (
+	&quot;WordId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_SearchIndexDocument&quot; ON &quot;SearchIndexDocument&quot; (
+	&quot;WordId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_Word&quot; ON &quot;Word&quot; (
+	&quot;Word&quot;,
+	&quot;Reading&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_Topic&quot; ON &quot;Topic&quot; (
+	&quot;Topic&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ParagraphCommentary&quot; ON &quot;ParagraphCommentary&quot; (
+	&quot;CommentaryType&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ParagraphCommentaryMap&quot; ON &quot;ParagraphCommentaryMap&quot; (
+	&quot;MEPSDocumentId&quot;,
+	&quot;ParagraphCommentaryId&quot;,
+	&quot;BeginParagraphOrdinal&quot;,
+	&quot;EndParagraphOrdinal&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_VideoMarkerParagraphLocation&quot; ON &quot;VideoMarkerParagraphLocation&quot; (
+	&quot;DocumentParagraphId&quot;,
+	&quot;VideoMarkerId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_DocumentMultimedia&quot; ON &quot;DocumentMultimedia&quot; (
+	&quot;DocumentId&quot;,
+	&quot;MultimediaId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_DocumentExtract&quot; ON &quot;DocumentExtract&quot; (
+	&quot;DocumentId&quot;,
+	&quot;ExtractId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_PublicationViewItem&quot; ON &quot;PublicationViewItem&quot; (
+	&quot;DefaultDocumentId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_VerseCommentary&quot; ON &quot;VerseCommentary&quot; (
+	&quot;CommentaryType&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_VerseCommentaryMap&quot; ON &quot;VerseCommentaryMap&quot; (
+	&quot;BibleVerseId&quot;,
+	&quot;VerseCommentaryId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_Extract_Link_RefPublicationId&quot; ON &quot;Extract&quot; (
+	&quot;Link&quot;,
+	&quot;RefPublicationId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ExtractVideoMarker_ExtractMultimediaId&quot; ON &quot;ExtractVideoMarker&quot; (
+	&quot;ExtractMultimediaId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ExtractMultimedia_RefMepsDocumentId&quot; ON &quot;ExtractMultimedia&quot; (
+	&quot;RefMepsDocumentId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ExtractMultimedia_ExtractMultimediaId_MajorType_MinorType&quot; ON &quot;ExtractMultimedia&quot; (
+	&quot;RefMepsDocumentId&quot;,
+	&quot;MajorType&quot;,
+	&quot;MinorType&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ExtractVideoMarkerRange_ExtractId&quot; ON &quot;ExtractVideoMarkerRange&quot; (
+	&quot;ExtractId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ExtractVideoMarkerRange_FirstExtractVideoMarkerId&quot; ON &quot;ExtractVideoMarkerRange&quot; (
+	&quot;FirstExtractVideoMarkerId&quot;
+);
+CREATE INDEX IF NOT EXISTS &quot;idx_ExtractVideoMarkerRange_LastExtractVideoMarkerId&quot; ON &quot;ExtractVideoMarkerRange&quot; (
+	&quot;LastExtractVideoMarkerId&quot;
+);
+COMMIT;</sql><current_tab id="0"/></tab_sql></sqlb_project>
